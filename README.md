@@ -1,42 +1,40 @@
 # KNOWLEDGE GRAPH FOR MULTI-HOP QUESTION ANSWERING
 
-Question Answering (QA) currently has many limitations, especially in Vietnamese, in its ability to infer complex reasoning. In addition, historical language data has not been exploited much. The research team aims to study and develop the Multi-hop QA problem for Vietnamese history based on Knowledge Graph.
+Question Answering (QA) is an important problem in Natural Language Processing (NLP); however, several limitations persist, particularly in the realm of Vietnamese language processing. A major challenge lies in the ability to infer complex reasoning. Additionally, historical language data remains underutilized, presenting an opportunity for further exploration. As a response to these challenges, We do a research and develop the Multi-hop QA problem for Vietnamese history, employing the power of Knowledge Graphs.
 
-However, the model has not achieved the expected accuracy and complexity. Team will continue to develop the model and historical vocabulary to expand the knowledge graph and improve the Multi-hop QA tool based on the knowledge graph in the future.
+However, the model has not achieved the expected accuracy and complexity, our team will continue on developing the model and historical vocabulary to expand the Knowledge Graph and improve the Multi-hop QA tool based on the knowledge graph in the future.
 
-
-%% trực quan hóa knowledge Graph
+![image](https://github.com/tannd-ds/vi-potqa/assets/64354200/29bfef36-d7e9-474f-a260-968e5a37281f)
 
 Details of the models and experimental results can be found in the following report.
-
+Our model is available at https://github.com/ndp1707/KG4MQA
 ## Result
 
 
-| Models             | Accuracy                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Token+NER\_MATCHING           | 53.5046 |
-| Token+NER\_phoNLP             | 43.1433 |
+| Models                        | Accuracy    |
+|-------------------------------|-------------|
+| Token+NER\_MATCHING           | 53.5046     |
+| Token+NER\_phoNLP             | 43.1433     |
 | **Token+NER\_sentence**       | **56.7348** |
-| Token+NER\_original\_sentence | 53.7337 |
-| Longest+NER\_MATCHING         | 52.9981 |
-| Longest+NER\_phoNLP           | 43.143 |
+| Token+NER\_original\_sentence | 53.7337     |
+| Longest+NER\_MATCHING         | 52.9981     |
+| Longest+NER\_phoNLP           | 43.143      |
 | **Longest+NER\_sentence**     | **56.3394** |
-| Underpy+NER\_MATCHING         | 52.8087 |
-| Underpy+NER\_phoNLP           | 41.1765 |
-| Underpy+NER\_sentence         | 56.0173 |
+| Underpy+NER\_MATCHING         | 52.8087     |
+| Underpy+NER\_phoNLP           | 41.1765     |
+| Underpy+NER\_sentence         | 56.0173     |
 
 
-## Requirements
+## Data
+
+- Wikipedia
+- [A collection of Vietnamese data files in text format for language processing](https://github.com/winstonleedev/tudien/tree/master)
+- [Multi-hop QA Dataset (vi-potpa)](https://github.com/tannd-ds/vi-potqa)
 
 
-```bash
-pip install langdetect
-pip install unidecode
-pip install pyvi
-pip install underthesea
-pip install py_vncorenlp
-pip3 install phonlp
-```
+
+
+
 ## Usage/Examples
 
 ### Vocabulary
@@ -59,8 +57,8 @@ remove_data(word_list, data = vocabulary , path= '/absolute/path/to/vocabulary')
 ```
 
 
-### Tokenize
-
+### TOKENIZE, POSTAG
+- Tokenize based on Longest_matching, [underthesea](https://github.com/undertheseanlp/underthesea) and Pyvi
 ```python
 from Tokenize.Tokenize import Tokenize, longest_matching, Underthesea_pyvi
 
@@ -76,6 +74,8 @@ model.annotate(text = 'Tôi là nhà cách mạng cộng sản Việt Nam .')
 
 ### NER
 
+- Our NER() approach based on [PhoNLP](https://github.com/VinAIResearch/PhoNLP) with [PhoBERT](https://github.com/VinAIResearch/PhoBERT)-base pretrain and our Historical Dictionary.
+- The pre-trained phonlp for History of VietNam can be manually downloaded from 
 ```python
 from ner.ner import NER
 
